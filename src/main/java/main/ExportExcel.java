@@ -1,3 +1,7 @@
+package main;
+
+import lombok.RequiredArgsConstructor;
+import model.Product;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -11,6 +15,7 @@ import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFDataFormat;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,6 +26,9 @@ import java.util.List;
 
 public class ExportExcel {
 
+    @Autowired
+    Product product;
+
     public static void main(String[] args) {
 
         //variáveis
@@ -29,9 +37,9 @@ public class ExportExcel {
         Cell cell;
         Row row;
 
-        // Criando o arquivo e uma planilha chamada "Product"
+        // Criando o arquivo e uma planilha chamada "model.Product"
         XSSFWorkbook workbook = new XSSFWorkbook();
-        XSSFSheet sheet = workbook.createSheet("Product");
+        XSSFSheet sheet = workbook.createSheet("model.Product");
 
         //Configurando código para criar estilos de células (Cores, alinhamento, formatação, etc..)
         XSSFDataFormat numerFormat = workbook.createDataFormat();
@@ -83,17 +91,19 @@ public class ExportExcel {
         numberStyle.setVerticalAlignment(VerticalAlignment.CENTER);
         sheet.createFreezePane(2, 1);
 
+
+
         //Carregando Produtos para Lista
         List<Product> productsList = new ArrayList<>();
-        productsList.add(new Product(1l, "Produto 1", 200.5d));
-        productsList.add(new Product(2l, "Produto 2", 1050.5d));
-        productsList.add(new Product(3l, "Produto 3", 50d));
-        productsList.add(new Product(4l, "Produto 4", 200d));
-        productsList.add(new Product(5l, "Produto 5", 450d));
-        productsList.add(new Product(6l, "Produto 6", 150.5d));
-        productsList.add(new Product(7l, "Produto 7", 300.99d));
-        productsList.add(new Product(8l, "Produto 8", 1000d));
-        productsList.add(new Product(9l, "Produto 9", 350d));
+        productsList.add(new Product(1l,  "Produto 1",  200.5d));
+        productsList.add(new Product(2l,  "Produto 2",  1050.5d));
+        productsList.add(new Product(3l,  "Produto 3",  50d));
+        productsList.add(new Product(4l,  "Produto 4",  200d));
+        productsList.add(new Product(5l,  "Produto 5",  450d));
+        productsList.add(new Product(6l,  "Produto 6",  150.5d));
+        productsList.add(new Product(7l,  "Produto 7",  300.99d));
+        productsList.add(new Product(8l,  "Produto 8",  1000d));
+        productsList.add(new Product(9l,  "Produto 9",  350d));
         productsList.add(new Product(10l, "Produto 10", 200d));
         productsList.add(new Product(11l, "Produto 11", 350d));
         productsList.add(new Product(12l, "Produto 12", 850d));
@@ -124,8 +134,13 @@ public class ExportExcel {
             cell = row.createCell(cellnum++);
             cell.setCellStyle(numberStyle);
             cell.setCellValue(product.getPrice());
-        }
 
+            int value = 1000;
+            if(product.getPrice() < value ) {
+                numberStyle.setFillForegroundColor(IndexedColors.LIGHT_TURQUOISE.getIndex());
+                numberStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+            }
+        }
         try {
 
             //Escrevendo o arquivo em Disco.
