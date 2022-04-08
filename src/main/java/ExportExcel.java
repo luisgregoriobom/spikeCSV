@@ -50,12 +50,23 @@ public class ExportExcel {
         headerStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
         headerStyle.setAlignment(HorizontalAlignment.CENTER);
         headerStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+        sheet.createFreezePane(0,1);
+
 
         CellStyle textStyle = workbook.createCellStyle();
         textStyle.setFillForegroundColor(IndexedColors.SEA_GREEN.getIndex());
         textStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
         textStyle.setAlignment(HorizontalAlignment.CENTER);
         textStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+        textStyle.setBorderBottom(BorderStyle.HAIR);
+        textStyle.setBottomBorderColor(IndexedColors.BLACK1.getIndex());
+        textStyle.setBorderLeft(BorderStyle.HAIR);
+        textStyle.setLeftBorderColor(IndexedColors.GREEN.getIndex());
+        textStyle.setBorderRight(BorderStyle.HAIR);
+        textStyle.setRightBorderColor(IndexedColors.BLUE.getIndex());
+        textStyle.setBorderTop(BorderStyle.HAIR);
+        textStyle.setTopBorderColor(IndexedColors.BLACK.getIndex());
+        sheet.createFreezePane(2,1);
 
         CellStyle numberStyle = workbook.createCellStyle();
         numberStyle.setFillForegroundColor(IndexedColors.LIGHT_TURQUOISE.getIndex());
@@ -64,6 +75,7 @@ public class ExportExcel {
         numberStyle.setAlignment(HorizontalAlignment.CENTER);
         numberStyle.setVerticalAlignment(VerticalAlignment.CENTER);
 
+
         //Configurando Header de Colunas, iniciar contagem de célula sempre no 0.
         row = sheet.createRow(rownum++);
         cell = row.createCell(cellnum++);
@@ -71,8 +83,7 @@ public class ExportExcel {
 
         //Tentando configurar scroll lock com formatação na fonte
         cell.setCellValue("PAC ABRIL - Validade: 01/04/2022 a 30/04/2022");
-
-        sheet.createFreezePane(0,1);
+        cell.setCellStyle(headerStyle);
         sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 2));
 
 
