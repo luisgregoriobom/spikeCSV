@@ -31,12 +31,12 @@ public class SheetStyle {
         this.cell = cell;
         this.row = row;
         setLayoutDimensions();
-        setHeader();
-        setFont();
+        setHeaderStyle();
+        setFontStyle();
         setTextStyle();
         setNumberStyle();
     }
-    public void setFont(){
+    public void setFontStyle(){
         Font font = workbook.createFont();
         font.setFontHeightInPoints((short) 15);
         font.setFontName("Courier New");
@@ -45,7 +45,7 @@ public class SheetStyle {
         font.setBold(true);
         headerStyle.setFont(font);
     }
-    private void setHeader(){
+    private void setHeaderStyle(){
         headerStyle =  this.workbook.createCellStyle();
         headerStyle.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
         headerStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
