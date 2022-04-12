@@ -1,6 +1,5 @@
-package model;
+package Model;
 
-import lombok.Builder;
 import lombok.Data;
 
 @Data
