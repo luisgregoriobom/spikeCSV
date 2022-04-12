@@ -31,7 +31,6 @@ public class SheetStyle {
         this.cell = cell;
         this.row = row;
         setLayoutDimensions();
-        sheet.createFreezePane(3,1);
         setHeader();
         setFont();
         setTextStyle();
@@ -52,7 +51,8 @@ public class SheetStyle {
         headerStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
         headerStyle.setAlignment(HorizontalAlignment.LEFT);
         headerStyle.setVerticalAlignment(VerticalAlignment.CENTER);
-        sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 2));
+        sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 6));
+        sheet.createFreezePane(3,1);
     }
     private void setTextStyle(){
         textStyle =  this.workbook.createCellStyle();
@@ -77,6 +77,7 @@ public class SheetStyle {
         numberStyle.setDataFormat(numberFormat.getFormat("#,##0.00"));
         numberStyle.setAlignment(HorizontalAlignment.CENTER);
         numberStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+        sheet.createFreezePane(2,1);
     }
     private void setLayoutDimensions(){
         sheet.setDefaultColumnWidth(40);
