@@ -14,7 +14,6 @@ import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFDataFormat;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
 @Data
 public class SheetStyle {
 
@@ -38,7 +37,6 @@ public class SheetStyle {
         setTextStyle();
         setNumberStyle();
     }
-
     public void setFont(){
         Font font = workbook.createFont();
         font.setFontHeightInPoints((short) 15);
@@ -56,7 +54,6 @@ public class SheetStyle {
         headerStyle.setVerticalAlignment(VerticalAlignment.CENTER);
         sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 2));
     }
-
     private void setTextStyle(){
         textStyle =  this.workbook.createCellStyle();
         textStyle.setFillForegroundColor(IndexedColors.SEA_GREEN.getIndex());
@@ -81,7 +78,6 @@ public class SheetStyle {
         numberStyle.setAlignment(HorizontalAlignment.CENTER);
         numberStyle.setVerticalAlignment(VerticalAlignment.CENTER);
     }
-
     private void setLayoutDimensions(){
         sheet.setDefaultColumnWidth(40);
         sheet.setDefaultRowHeight((short) 500);
