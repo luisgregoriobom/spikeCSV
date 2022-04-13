@@ -14,6 +14,7 @@ import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFDataFormat;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 @Data
 public class SheetStyle {
 
@@ -23,6 +24,7 @@ public class SheetStyle {
     private CellStyle headerStyle;
     private CellStyle textStyle;
     private CellStyle numberStyle;
+    private CellStyle ruleStyle;
     private XSSFSheet sheet;
 
     public SheetStyle(XSSFWorkbook workbook, XSSFSheet sheet, Cell cell, Row row){
@@ -35,7 +37,9 @@ public class SheetStyle {
         setFontStyle();
         setTextStyle();
         setNumberStyle();
+        setRuleStyle();
     }
+
     public void setFontStyle(){
         Font font = workbook.createFont();
         font.setFontHeightInPoints((short) 15);
@@ -45,6 +49,7 @@ public class SheetStyle {
         font.setBold(true);
         headerStyle.setFont(font);
     }
+
     private void setHeaderStyle(){
         headerStyle =  this.workbook.createCellStyle();
         headerStyle.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
@@ -54,6 +59,7 @@ public class SheetStyle {
         sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 6));
         sheet.createFreezePane(3,1);
     }
+
     private void setTextStyle(){
         textStyle =  this.workbook.createCellStyle();
         textStyle.setFillForegroundColor(IndexedColors.SEA_GREEN.getIndex());
@@ -69,6 +75,7 @@ public class SheetStyle {
         textStyle.setBorderTop(BorderStyle.HAIR);
         textStyle.setTopBorderColor(IndexedColors.BLACK.getIndex());
     }
+
     private void setNumberStyle(){
         numberStyle =  this.workbook.createCellStyle();
         XSSFDataFormat numberFormat = workbook.createDataFormat();
@@ -79,6 +86,18 @@ public class SheetStyle {
         numberStyle.setVerticalAlignment(VerticalAlignment.CENTER);
         sheet.createFreezePane(2,1);
     }
+
+    private void setRuleStyle(){
+        ruleStyle = this.workbook.createCellStyle();
+        XSSFDataFormat ruleNumberFormat = workbook.createDataFormat();
+        ruleStyle.setFillForegroundColor(IndexedColors.RED.getIndex());
+        ruleStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        ruleStyle.setDataFormat(ruleNumberFormat.getFormat("#,##0.00"));
+        ruleStyle.setAlignment(HorizontalAlignment.CENTER);
+        ruleStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+        sheet.createFreezePane(2,1);
+    }
+
     private void setLayoutDimensions(){
         sheet.setDefaultColumnWidth(40);
         sheet.setDefaultRowHeight((short) 500);

@@ -2,7 +2,9 @@ package CellConfiguration.ImportDataCell;
 
 import CellConfiguration.FormatColumnCell.SheetStyle;
 import Model.Product;
-import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -14,7 +16,6 @@ public class DataManipulation {
     private Cell cell;
     private Row row;
     private XSSFSheet sheet;
-
     private SheetStyle sheetStyle;
 
     public DataManipulation (XSSFWorkbook workbook, XSSFSheet sheet, Cell cell, Row row, SheetStyle sheetStyle) {
@@ -39,7 +40,11 @@ public class DataManipulation {
 
             addCell(cellnum++, product.getId().toString(), sheetStyle.getTextStyle());
             addCell(cellnum++, product.getName(), sheetStyle.getTextStyle());
-            addCell(cellnum++, product.getPrice().toString(), sheetStyle.getNumberStyle());
+                if(product.getPrice() >= 1000d) {
+                    addCell(cellnum++, product.getPrice().toString(), sheetStyle.getRuleStyle());
+                } else {
+                    addCell(cellnum++, product.getPrice().toString(), sheetStyle.getNumberStyle());
+            }
         }
     }
     private void addCell(Integer position, String value, CellStyle style){
@@ -47,5 +52,4 @@ public class DataManipulation {
         cell.setCellStyle(style);
         cell.setCellValue(value);
     }
-
 }
