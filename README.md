@@ -1,5 +1,5 @@
 # spikeCSV
-PoC realizada a respeito de um estudo de viabilidade de importação e exportação de arquivos CSV diretamente da aplicação.
+PoC realizada a respeito de um estudo de viabilidade de importação e exportação de arquivos CSV diretamente da aplicação web.
 
 Manipulações de células desenvolvidas:
 Colorir Células: OK
